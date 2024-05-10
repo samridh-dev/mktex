@@ -1,0 +1,92 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Preamble.tex - LaTeX Preamble                                           %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------------- %
+% Prerequisites                                                               %
+% --------------------------------------------------------------------------- %
+
+\newcommand{\setcompilerflag}[2]{%
+  \usepackage{etoolbox}
+  \newtoggle{#1}%
+  \ifstrequal{#2}{1}{\toggletrue{#1}}{%
+  \ifstrequal{#2}{0}{\togglefalse{#1}}{%
+  \PackageError{SetCompileFlag}{Invalid value for flag}%
+               {Valid values are '1' or '0'.}%
+}}}
+
+% --------------------------------------------------------------------------- %
+% User Variables                                                              %
+% --------------------------------------------------------------------------- %
+
+% Document class settings
+\documentclass[11pt, a4paper]{article}
+
+\setcompilerflag{IncludeMath}           {0}     % Include Mathematics
+\setcompilerflag{IncludeGraphics}       {0}     % Include Graphics
+\setcompilerflag{IncludeTable}          {0}     % Include Table
+\setcompilerflag{IncludeBibliography}   {0}     % Include Bibliography
+\setcompilerflag{IncludeSecNumbering}   {0}     % Include Section Numbering
+\setcompilerflag{IncludeDate}           {0}     % Include Today's date
+\setcompilerflag{IncludeToC}            {0}     % Include Table of Contents
+
+% --------------------------------------------------------------------------- %
+% Main                                                                        %
+% --------------------------------------------------------------------------- %
+
+% Encoding packages
+\usepackage[utf8]{inputenc} % Allows input encoding of your file as UTF-8
+\usepackage[T1]{fontenc}    % Font encoding
+
+% Language settings
+\usepackage[english]{babel}
+
+% Extended color support
+\usepackage{xcolor}
+
+\iftoggle{IncludeMath}{%
+  % Mathematics packages
+  \usepackage{amsmath}    % Enhanced mathematical formulas
+  \usepackage{amsfonts}   % Additional mathematical fonts
+  \usepackage{amssymb}    % Extended symbol collection
+}
+
+\iftoggle{IncludeGraphics}{%
+  % Graphics packages
+  \usepackage{graphicx}         % Extended graphics support
+  \graphicspath{{../dat/img/}}  % Sets path for images in directory structure
+}
+
+\iftoggle{IncludeTable}{%
+  % Table packages
+  \usepackage{array}      % Enhanced arrays and tables
+  \usepackage{booktabs}   % Publication quality tables
+}
+
+\iftoggle{IncludeBibliography}{%
+  % Bibliography management
+  \usepackage{biblatex}
+  \addbibresource{references.bib}
+}
+
+\iftoggle{IncludeSecNumbering}{%
+  \setcounter{secnumdepth}{3}
+}
+
+\iftoggle{IncludeDate}{%
+  \date{\today}
+}
+
+
+% Hyperlink package (after all other packages)
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% End                                                                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

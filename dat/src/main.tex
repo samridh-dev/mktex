@@ -1,0 +1,15 @@
+\input{preamble.tex}
+\begin{document}
+
+\title{Title}
+\author{Samridh D. Singh}
+\date{\today}
+\maketitle
+
+% Print Table of Contents if set
+\iftoggle{IncludeToC}{\tableofcontents\newpage}
+
+% Print bibliography if set
+\iftoggle{IncludeBibliography}{\printbibliography}
+
+\end{document}
